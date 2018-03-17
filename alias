@@ -91,3 +91,21 @@ list-lc = autoscaling describe-launch-configurations \
 list-routes = ec2 describe-route-tables \
   --query "RouteTables[].{RouteTableId:RouteTableId, VpcId:VpcId, Name: Tags[?Key=='Name'].Value| [0], GatewayId: Routes[].{GatewayId:GatewayId,DestinationCidrBlock: DestinationCidrBlock} }  " \
   --output table
+
+# aws s3head s3://randhunt-code/template.yaml 10
+s3cat =
+ !f() {
+     tmpfile=$(mktemp)
+     aws s3 cp $1 $tmpfile
+     cat "$tmpfile"
+     rm "$tmpfile"
+   }; f
+ 
+s3head =
+   !f() {
+     tmpfile=$(mktemp)
+     aws s3 cp $1 $tmpfile
+     head -n $2 "$tmpfile"
+    rm "$tmpfile"
+   }; f
+
