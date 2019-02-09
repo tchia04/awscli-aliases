@@ -29,7 +29,7 @@ ebs-volumes= ec2 describe-volumes \
 amazon-linux-amis = ec2 describe-images \
     --filter \
       Name=owner-alias,Values=amazon \
-      Name=name,Values="amzn-ami-hvm-*" \
+      Name=name,Values="amzn2-ami-hvm-*" \
       Name=architecture,Values=x86_64 \
       Name=virtualization-type,Values=hvm \
       Name=root-device-type,Values=ebs \
